@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -7,7 +6,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <AutoComp />
-        <img src={logo} className="App-logo" alt="logo" />
       </header>
     </div>
   );
@@ -18,8 +16,12 @@ class AutoComp extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {words: new Array()};
+    this.state = {
+      words: [],
+      errorMsg: ""
+    };
     this.inputRef = React.createRef();
+    // this.errorText = React.createRef();
   }
 
   handleChange(event) {
@@ -29,9 +31,24 @@ class AutoComp extends React.Component {
     fetch("http://localhost:3001/autocomplete/" + word)
       .then(res => res.json())
       .then(data => {
+        
+        // sort
+        data = data.sort((a,b) => {
+          return a.length - b.length;
+        })
+
         this.setState({
-          words: data
+          words: data,
+          errorMsg: ""
         });
+
+      })
+      .catch(err => {
+        err.text().then(errorMessage => {
+          this.setState({
+            errorMsg: String(errorMessage)
+          });
+        })
       });
   }
 
@@ -63,10 +80,14 @@ class AutoComp extends React.Component {
         />
 
         <datalist id="suggestions">
-          {this.state.words.map((word) =>
-            <option value={this.createSuggestion(word)} />
+          {this.state.words.map((word, key) =>
+            <option key={key} value={this.createSuggestion(word)} />
           )}
         </datalist>
+
+        <p ref={this.errorText} style={{color: "red"}}>
+          {this.state.errorMsg}
+        </p>
 
       </div>
     )
