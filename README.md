@@ -12,6 +12,8 @@ To understand how to handle **AJAX requests** with React follow their docs [here
 
 When developing the dropdown menu it was unclear how React would handle the iterative method of the `datalist` tag. This [stackoverflow post](https://stackoverflow.com/questions/45167565/does-react-js-support-html5-datalist) was useful to understand how it all comes together and whether datalist is supported in React.
 
+For sorting a condition is applied to ensure ascending length (shortest first). The condition `a.length - b.length` is applied given the input is `function(a, b)`. 
+
 # Errors and how to overcome them
 
 ## TypeError: Cannot read property 'inputRef' of undefined
