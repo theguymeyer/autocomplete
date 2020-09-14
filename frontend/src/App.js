@@ -23,8 +23,8 @@ class AutoComp extends React.Component {
   }
 
   handleChange(event) {
-    var words = (this.inputRef.current.value).split(" ");
-    var word = words[words.length - 1];
+    let words = (this.inputRef.current.value).split(" ");
+    let word = words[words.length - 1];
 
     fetch("http://localhost:3001/autocomplete/" + word)
       .then(res => res.json())
@@ -33,6 +33,24 @@ class AutoComp extends React.Component {
           words: data
         });
       });
+  }
+
+  createSuggestion(word) {
+    let words = this.inputRef.current.value.split(" ");
+    words = words.slice(0, words.length -1);
+
+    if (words.length > 0) {
+
+      let str = words[0];
+      for (let i = 1; i < words.length; i++) {
+        str = str.concat(" ", words[i]);
+      }
+  
+      return (str + " " + word);
+    } else {
+      return word;
+    }
+    
   }
 
   render() {
@@ -45,8 +63,8 @@ class AutoComp extends React.Component {
         />
 
         <datalist id="suggestions">
-          {this.state.words.map((word, id) => 
-            <option key={id} value={word} />
+          {this.state.words.map((word) =>
+            <option value={this.createSuggestion(word)} />
           )}
         </datalist>
 
