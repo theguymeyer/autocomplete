@@ -3,6 +3,9 @@ const { resolve } = require('path');
 const app = express()
 const port = 3001
 const exec = require('child_process').exec;
+const cors = require('cors'); // to allow cross access origin policy
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
