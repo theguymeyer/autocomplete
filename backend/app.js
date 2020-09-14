@@ -10,6 +10,8 @@ app.get('/', (req, res) => {
 
 app.get('/autocomplete/:word', (req, res) => {
 
+    // utilizing grep as a fast function that can limit its output
+    // modify the `-m` flag to change the length of the return list
     exec(('grep -m 10 ^' + String(req.params.word) + ' ./res/words.txt'), (err, stdout, stderr) => {
         if (err) { console.log(err); }
         else {
