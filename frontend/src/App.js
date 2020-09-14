@@ -25,7 +25,15 @@ class AutoComp extends React.Component {
   }
 
   handleChange(event) {
-    console.log(this.inputRef.current.value);
+    var words = (this.inputRef.current.value).split(" ");
+    var word = words[words.length - 1];
+
+    fetch("http://localhost:3001/autocomplete/" + word)
+      .then(
+        (res) => {
+          console.log(res);
+        }
+      )
   }
 
   render() {
