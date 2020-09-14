@@ -7,9 +7,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <AutoComp />
       </header>
     </div>
@@ -21,6 +18,7 @@ class AutoComp extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {words: new Array()};
     this.inputRef = React.createRef();
   }
 
@@ -30,16 +28,28 @@ class AutoComp extends React.Component {
 
     fetch("http://localhost:3001/autocomplete/" + word)
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        this.setState({
+          words: data
+        });
+      });
   }
 
   render() {
     return (
       <div>
         <input 
+          list="suggestions"
           ref={this.inputRef}
           onChange={this.handleChange.bind(this)}
         />
+
+        <datalist id="suggestions">
+          {this.state.words.map((word, id) => 
+            <option key={id} value={word} />
+          )}
+        </datalist>
+
       </div>
     )
   }
