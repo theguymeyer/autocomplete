@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/autocomplete/', (req, res) => {
     // null response
-    res.send("");
+    res.send([]);
 })
 
 app.get('/autocomplete/:word', (req, res) => {
