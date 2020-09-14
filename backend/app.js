@@ -11,6 +11,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+app.get('/autocomplete/', (req, res) => {
+    // null response
+    res.send("");
+})
+
 app.get('/autocomplete/:word', (req, res) => {
 
     // utilizing grep as a fast function that can limit its output
