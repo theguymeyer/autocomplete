@@ -29,11 +29,8 @@ class AutoComp extends React.Component {
     var word = words[words.length - 1];
 
     fetch("http://localhost:3001/autocomplete/" + word)
-      .then(
-        (res) => {
-          console.log(res);
-        }
-      )
+      .then(res => res.json())
+      .then(data => console.log(data));
   }
 
   render() {
