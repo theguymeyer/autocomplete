@@ -4,6 +4,8 @@ The backend server is running Node in Unix environment so useful functions like 
 
 In the frontend, a new component was created, AutoComp, which extends a React component. The purpose for this is to molarize the code so that modifications are clear and easy. In addition, a reference designator (created using `React.creatRef`) was used to locate the correct input element on the page. Credits to [this page in the React Docs](https://reactjs.org/docs/refs-and-the-dom.html) for explaining references in React.
 
+To understand how to handle **AJAX requests** with React follow their docs [here](https://reactjs.org/docs/faq-ajax.html).
+
 # Errors and how to overcome them
 
 ## TypeError: Cannot read property 'inputRef' of undefined
